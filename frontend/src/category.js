@@ -2,7 +2,7 @@ class Category {
     constructor(dataObject) {
       this.id = dataObject.id;
       this.name = dataObject.name;
-      this.products = dataObject.items;
+      this.products = dataObject.products;
     }
   
     renderIndexCategory() {
