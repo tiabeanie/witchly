@@ -5,7 +5,29 @@ class ProductsController < ApplicationController
     end
 
     def show
-        product = Item.find(params[:id])
+        product = product.find(params[:id])
         render json: product
     end
-end
+
+    def create
+        product = Product.new(product_params)
+        if product.save
+          render json: product
+        else
+          
+        end
+      end
+    
+      def destroy
+        product = Product.find(params[:id])
+    
+        if product.destroy
+          render json: { id: product.id }
+        end
+      end
+    
+      private
+      def product_params
+        params.require(:product).permit(:name, :description, :price)
+      end
+    end
