@@ -8,45 +8,45 @@ const categoriesNavEl = document.getElementById("categories-nav");
 const productDetailEl = document.getElementById("product-detail");
 
 const init = () => {
-  getproducts();
-  bindNavproductListeners();
-  bindproductFormEventListener();
+  getProducts();
+  bindNavProductListeners();
+  bindProductFormEventListener();
 };
 
-const getproducts = () => {
+const getProducts = () => {
   mainListEl.innerHTML = "<h1>Loading...</h1>";
   fetch("http://localhost:3000/products")
     .then((res) => res.json())
     .then((data) => {
       mainListEl.innerHTML = "";
-      mainListTitleEl.innerText = "products";
+      mainListTitleEl.innerText = "Products";
       data.forEach((productObject) => {
-        const newproduct = new product(productObject);
-        mainListEl.innerHTML += newproduct.renderIndexproduct();
+        const newProduct = new Product(productObject);
+        mainListEl.innerHTML += newProduct.renderIndexProduct();
       });
 
       document
         .querySelectorAll(".product-link")
-        .forEach((link) => link.addEventListener("click", showproductDetails));
+        .forEach((link) => link.addEventListener("click", showProductDetails));
       document
         .querySelectorAll(".delete-btn")
-        .forEach((btn) => btn.addEventListener("click", deleteproduct));
+        .forEach((btn) => btn.addEventListener("click", deleteProduct));
     });
 };
 
-function showproductDetails(e) {
+function showProductDetails(e) {
   console.log(e.target);
   const { id } = e.target.dataset;
-  console.log(`product ${id} was clicked`);
+  console.log(`Product ${id} was clicked`);
   fetch(`http://localhost:3000/products/${id}`)
     .then((res) => res.json())
     .then((product) => {
-      const newproduct = new product(product);
-      productDetailEl.innerHTML = newproduct.renderShowproduct();
+      const newProduct = new Product(product);
+      productDetailEl.innerHTML = newProduct.renderShowProduct();
     });
 }
 
-function deleteproduct(e) {
+function deleteProduct(e) {
   const { id } = e.target.dataset;
   fetch(`http://localhost:3000/products/${id}`, {
     method: "DELETE",
@@ -72,37 +72,37 @@ const getCategories = () => {
 
       document
         .querySelectorAll(".product-link")
-        .forEach((link) => link.addEventListener("click", showproductDetails));
+        .forEach((link) => link.addEventListener("click", showProductDetails));
       document
         .querySelectorAll(".delete-btn")
-        .forEach((btn) => btn.addEventListener("click", deleteproduct));
+        .forEach((btn) => btn.addEventListener("click", deleteProduct));
     });
 };
 
 init();
 
-function submitproduct(data) {
+function submitProduct(data) {
   fetch(`http://localhost:3000/products`, {
     method: "POST",
     body: data,
   })
     .then((res) => res.json())
     .then((product) => {
-      const newproduct = new product(product);
-      mainListEl.innerHTML += newproduct.renderIndexproduct();
+      const newProduct = new Product(product);
+      mainListEl.innerHTML += newProduct.renderIndexProduct();
     });
 }
 
-function bindproductFormEventListener() {
+function bindProductFormEventListener() {
   productForm.addEventListener("submit", function (e) {
     e.preventDefault();
     const formData = new FormData(e.target);
     console.log(formData.values());
-    submitproduct(formData);
+    submitProduct(formData);
   });
 }
 
-function bindNavproductListeners() {
-  productsNavEl.addEventListener("click", getproducts);
+function bindNavProductListeners() {
+  productsNavEl.addEventListener("click", getProducts);
   categoriesNavEl.addEventListener("click", getCategories);
 }
