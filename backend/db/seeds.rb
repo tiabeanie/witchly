@@ -12,7 +12,7 @@ categories.each do |c|
     Category.create(name: c)
 end
 
-Products.all.each do |i|
+Product.all.each do |i|
     i.update(category: Category.all.sample(1)(0))
 end
 
