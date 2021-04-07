@@ -1,6 +1,6 @@
 const BASE_URL = "http://locahost:3000";
-const mainListEl = document.getElementById("main-list");
-const mainListTitleEl = document.getElementById("main-list-title");
+const productListEl = document.getElementById("product-list");
+const productListTitleEl = document.getElementById("product-list-title");
 const productsEl = document.getElementById("products-list");
 const productForm = document.getElementById("new-product");
 const productsNavEl = document.getElementById("products-nav");
@@ -14,15 +14,15 @@ const init = () => {
 };
 
 const getProducts = () => {
-  mainListEl.innerHTML = "<h1>Loading...</h1>";
+  productListEl.innerHTML = "<h1>Loading...</h1>";
   fetch("http://localhost:3000/products")
     .then((res) => res.json())
     .then((data) => {
-      mainListEl.innerHTML = "";
-      mainListTitleEl.innerText = "Products";
+      productListEl.innerHTML = "";
+      productListTitleEl.innerText = "Products";
       data.forEach((productObject) => {
         const newProduct = new Product(productObject);
-        mainListEl.innerHTML += newProduct.renderIndexProduct();
+        productListEl.innerHTML += newProduct.renderIndexProduct();
       });
 
       document
@@ -58,15 +58,15 @@ function deleteProduct(e) {
 }
 
 const getCategories = () => {
-  mainListTitleEl.innerText = "Categories";
-  mainListEl.innerHTML = "<h1>Loading...</h1>";
+  productListTitleEl.innerText = "Categories";
+  productListEl.innerHTML = "<h1>Loading...</h1>";
 
   fetch("http://localhost:3000/categories")
     .then((res) => res.json())
     .then((data) => {
-      mainListEl.innerHTML = "";
-      data.forEach((categoryObject) => {
-        const newCategory = new Category(categoryObject);
+      productListEl.innerHTML = "";
+      data.forEach((catObject) => {
+        const newCat = new Category(catObject);
         productListEl.innerHTML += newCat.renderIndexCategory();
       });
 
@@ -89,7 +89,7 @@ function submitProduct(data) {
     .then((res) => res.json())
     .then((product) => {
       const newProduct = new Product(product);
-      mainListEl.innerHTML += newProduct.renderIndexProduct();
+      productListEl.innerHTML += newProduct.renderIndexProduct();
     });
 }
 
