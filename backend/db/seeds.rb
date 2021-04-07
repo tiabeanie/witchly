@@ -6,13 +6,13 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-categories = Category.create([{ name: 'Herbs' }, { name: 'Crystals' }, { name: 'Tarot' }, { name: 'Incense and Oils'}, { name: 'Books'}])
+categories = ['Candles and Incense', 'Books', 'Tarot', 'Gemstones']
 
 categories.each do |c|
     Category.create(name: c)
 end
 
 Product.all.each do |p|
-    p.update(category: Category.all.sample(1)(0))
+    p.update(category: Category.all.sample(1)[0])
 end
 
