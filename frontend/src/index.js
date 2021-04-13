@@ -5,6 +5,7 @@ const productsEl = document.getElementById("products-list");
 const productForm = document.getElementById("new-product");
 const productsNavEl = document.getElementById("products-nav");
 const categoriesNavEl = document.getElementById("categories-nav");
+const categoriesList = document.getElementById("category-dropdown")
 const productDetailEl = document.getElementById("product-detail");
 
 const init = () => {
@@ -34,6 +35,7 @@ const getProducts = () => {
     });
 };
 
+
 function showProductDetails(e) {
   console.log(e.target);
   const { id } = e.target.dataset;
@@ -57,6 +59,7 @@ function deleteProduct(e) {
     });
 }
 
+
 const getCategories = () => {
   productListTitleEl.innerText = "Categories";
   productListEl.innerHTML = "<h1>Loading...</h1>";
@@ -70,6 +73,8 @@ const getCategories = () => {
         productListEl.innerHTML += newCat.renderIndexCategory();
       });
 
+      
+
       document
         .querySelectorAll(".product-link")
         .forEach((link) => link.addEventListener("click", showProductDetails));
@@ -78,8 +83,14 @@ const getCategories = () => {
         .forEach((btn) => btn.addEventListener("click", deleteProduct));
     });
 };
+      
 
 init();
+
+function chooseCategory
+  fetch(`http://localhost:3000/categories`, {
+    
+  }
 
 function submitProduct(data) {
   fetch(`http://localhost:3000/products`, {
