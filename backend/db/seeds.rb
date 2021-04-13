@@ -12,6 +12,6 @@ categories.each do |c|
     Category.create(name: c)
 end
 
-Product.all.each do |i|
-    i.update(category: Category.all.sample(1)[0])
+Product.all.each do |p|
+    p.update(category: Category.all.sample(1)[0])
 end
