@@ -76,7 +76,11 @@ const getCategories = () => {
         productListEl.innerHTML += newCat.renderIndexCategory();
       });
 
-      
+      categoriesChoose.innerHTML = "";
+      data.forEach((productObject) => {
+        const chooseCat = new Product(productObject);
+        categoriesChoose.innerHTML += chooseCat.renderIndexProduct();
+      });
 
       document
         .querySelectorAll(".product-link")
