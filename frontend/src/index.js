@@ -5,8 +5,8 @@ const productsEl = document.getElementById("products-list");
 const productForm = document.getElementById("new-product");
 const productsNavEl = document.getElementById("products-nav");
 const categoriesNavEl = document.getElementById("categories-nav");
-const categoriesList = document.getElementById("category-dropdown")
 const productDetailEl = document.getElementById("product-detail");
+const categoriesChoose = document.getElementById("categories-choose")
 
 const init = () => {
   getProducts();
