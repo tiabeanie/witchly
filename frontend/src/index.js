@@ -32,6 +32,9 @@ const getProducts = () => {
       document
         .querySelectorAll(".delete-btn")
         .forEach((btn) => btn.addEventListener("click", deleteProduct));
+      document
+        .querySelectorAll(".assign-category")
+        .forEach((btn) => btn.addEventListener("click", deleteProduct));
     });
 };
 
