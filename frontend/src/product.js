@@ -10,7 +10,7 @@ class Product {
     formatPrice() {
       return `$${this.price}`;
     }
-  
+
     renderShowProduct() {
       return `
       <h2 class="text-lg leading-6 font-medium text-gray-900">

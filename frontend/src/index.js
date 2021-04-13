@@ -10,6 +10,7 @@ const categoriesChoose = document.getElementById("categories-choose")
 
 const init = () => {
   getProducts();
+  getCategories();
   bindNavProductListeners();
   bindProductFormEventListener();
 };
@@ -34,7 +35,7 @@ const getProducts = () => {
         .forEach((btn) => btn.addEventListener("click", deleteProduct));
       document
         .querySelectorAll(".assign-category")
-        .forEach((btn) => btn.addEventListener("click", deleteProduct));
+        .forEach((btn) => btn.addEventListener("click", assignProduct));
     });
 };
 
@@ -76,25 +77,33 @@ const getCategories = () => {
         productListEl.innerHTML += newCat.renderIndexCategory();
       });
 
-      categoriesChoose.innerHTML = "";
-      data.forEach((productObject) => {
-        const chooseCat = new Product(productObject);
-        categoriesChoose.innerHTML += chooseCat.renderIndexProduct();
-      });
-
       document
         .querySelectorAll(".product-link")
         .forEach((link) => link.addEventListener("click", showProductDetails));
       document
         .querySelectorAll(".delete-btn")
         .forEach((btn) => btn.addEventListener("click", deleteProduct));
+      document
+        .querySelectorAll(".assign-categories")
+        .forEach((option) => option.addEventListener("click", assignProduct));
     });
 };
       
 
 init();
 
-
+function assignProduct(data) {
+  console.log(e.target);
+  fetch("http://localhost:3000/categories")
+    .then((res) => res.json())
+    .then((data) => {
+      categoriesChoose.innerHTML = "categories-choose";
+      data.forEach((productObject) => {
+        const newProduct = new Product(productObject);
+        categoriesChoose.innerHTML += newProduct.renderIndexProduct();
+      });
+    }
+  )
 function submitProduct(data) {
   fetch(`http://localhost:3000/products`, {
     method: "POST",
@@ -119,4 +128,5 @@ function bindProductFormEventListener() {
 function bindNavProductListeners() {
   productsNavEl.addEventListener("click", getProducts);
   categoriesNavEl.addEventListener("click", getCategories);
-}
+  categoriesChoose.addEventListener("click", assignProduct)
+}}
