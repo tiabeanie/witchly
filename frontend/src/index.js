@@ -87,10 +87,6 @@ const getCategories = () => {
 
 init();
 
-function chooseCategory
-  fetch(`http://localhost:3000/categories`, {
-    
-  }
 
 function submitProduct(data) {
   fetch(`http://localhost:3000/products`, {
