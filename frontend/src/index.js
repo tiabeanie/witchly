@@ -6,11 +6,12 @@ const productForm = document.getElementById("new-product");
 const productsNavEl = document.getElementById("products-nav");
 const categoriesNavEl = document.getElementById("categories-nav");
 const productDetailEl = document.getElementById("product-detail");
-const categoriesChoose = document.getElementById("categories-choose")
+const categoriesChoose = document.querySelector("select");
+
 
 const init = () => {
   getProducts();
-  getCategories();
+  assignProductCategory();
   bindNavProductListeners();
   bindProductFormEventListener();
 };
@@ -33,23 +34,21 @@ const getProducts = () => {
       document
         .querySelectorAll(".delete-btn")
         .forEach((btn) => btn.addEventListener("click", deleteProduct));
-      document
-        .querySelectorAll(".assign-category")
-        .forEach((btn) => btn.addEventListener("click", assignProduct));
     });
 };
 
 
+    
 function showProductDetails(e) {
   console.log(e.target);
   const { id } = e.target.dataset;
   console.log(`Product ${id} was clicked`);
   fetch(`http://localhost:3000/products/${id}`)
-    .then((res) => res.json())
+    .then((res) => res.json()
     .then((product) => {
       const newProduct = new Product(product);
       productDetailEl.innerHTML = newProduct.renderShowProduct();
-    });
+    }));
 }
 
 function deleteProduct(e) {
@@ -63,6 +62,20 @@ function deleteProduct(e) {
     });
 }
 
+function assignProductCategory() {
+  fetch("http://localhost:3000/categories")
+  .then((res) => res.json())
+  .then((data) => {
+    data.forEach(element => {
+      console.log(element.name)
+      categoriesChoose.innerHTML = <option value="1">*select the relevant category*</option>
+     })
+    document.querySelector("select");
+     
+
+  })
+
+}
 
 const getCategories = () => {
   productListTitleEl.innerText = "Categories";
@@ -74,6 +87,7 @@ const getCategories = () => {
       productListEl.innerHTML = "";
       data.forEach((catObject) => {
         const newCat = new Category(catObject);
+        debugger
         productListEl.innerHTML += newCat.renderIndexCategory();
       });
 
@@ -84,26 +98,14 @@ const getCategories = () => {
         .querySelectorAll(".delete-btn")
         .forEach((btn) => btn.addEventListener("click", deleteProduct));
       document
-        .querySelectorAll(".assign-categories")
-        .forEach((option) => option.addEventListener("click", assignProduct));
+        .querySelectorAll(".product-category")
+        .forEach((option) => option.addEventListener("click", assignProductCategory));
     });
 };
-      
+
 
 init();
 
-function assignProduct(data) {
-  console.log(e.target);
-  fetch("http://localhost:3000/categories")
-    .then((res) => res.json())
-    .then((data) => {
-      categoriesChoose.innerHTML = "categories-choose";
-      data.forEach((productObject) => {
-        const newProduct = new Product(productObject);
-        categoriesChoose.innerHTML += newProduct.renderIndexProduct();
-      });
-    }
-  )
 function submitProduct(data) {
   fetch(`http://localhost:3000/products`, {
     method: "POST",
@@ -113,6 +115,7 @@ function submitProduct(data) {
     .then((product) => {
       const newProduct = new Product(product);
       productListEl.innerHTML += newProduct.renderIndexProduct();
+      categoriesChoose.innerHTML += newProduct.renderIndexCategory();
     });
 }
 
@@ -128,5 +131,4 @@ function bindProductFormEventListener() {
 function bindNavProductListeners() {
   productsNavEl.addEventListener("click", getProducts);
   categoriesNavEl.addEventListener("click", getCategories);
-  categoriesChoose.addEventListener("click", assignProduct)
-}}
+}

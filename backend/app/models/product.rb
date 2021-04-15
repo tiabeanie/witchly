@@ -3,6 +3,6 @@ class Product < ApplicationRecord
 
 
     def category_name
-        self.category ? self.category.name : "Not assigned" 
+        self.category ? self.category.name : "Not Assigned" 
     end
 end

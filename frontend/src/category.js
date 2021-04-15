@@ -5,6 +5,8 @@ class Category {
       this.products = dataObject.products;
     }
   
+    
+    
     renderIndexCategory() {
       return `
           <li class="py-2">
@@ -21,3 +23,5 @@ class Category {
           `;
     }
   }
+
+  
