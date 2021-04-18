@@ -67,9 +67,11 @@ function assignProductCategory() {
   .then((res) => res.json())
   .then((data) => {
     data.forEach(element => {
-      console.log(element.name)
-      categoriesChoose.innerHTML = <option value="1">*select the relevant category*</option>
-     })
+      categoriesChoose.innerHTML = ("<option value=1>Insence and Candles</option>"), 
+      ("<option value=2>Books</option>"), 
+      ("<option value=3>Tarot</option>"), 
+      ("<option value=4>Gemstones</option>");
+    })
     document.querySelector("select");
      
 
@@ -87,7 +89,6 @@ const getCategories = () => {
       productListEl.innerHTML = "";
       data.forEach((catObject) => {
         const newCat = new Category(catObject);
-        debugger
         productListEl.innerHTML += newCat.renderIndexCategory();
       });
 
