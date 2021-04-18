@@ -67,14 +67,12 @@ function assignProductCategory() {
   .then((res) => res.json())
   .then((data) => {
     data.forEach(element => {
-      categoriesChoose.innerHTML = ("<option value=1>Insence and Candles</option>"), 
-      ("<option value=2>Books</option>"), 
-      ("<option value=3>Tarot</option>"), 
-      ("<option value=4>Gemstones</option>");
+      categoriesChoose.innerHTML = ["<option value=1>Incense and Candles</option>",
+      "<option value=2>Books</option>",
+      "<option value=3>Tarot</option>",
+      "<option value=4>Gemstones</option>"]
     })
     document.querySelector("select");
-     
-
   })
 
 }
